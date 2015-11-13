@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.company.medical.commodity.dao.ICommodityDao">
+	
+   <select id="queryLt" resultType="com.hoo.company.medical.commodity.model.CommodityModel">
+
+		SELECT
+			c.huowname,b.spbh,b.spmch,b.shpgg,b.pizhwh,b.jixing,a.hwshl
+		FROM 
+			hwsp  a,
+			spkfk b,
+			huoweizl c
+		<where>
+			a.hw = c.hw and a.spid = b.spid
+			<if test="commodity.huowname != null">
+				and c.huowname like '%${commodity.huowname}%'
+			</if>
+			<if test="commodity.spbh != null || commodity.spmch != null || commodity.shpgg != null || commodity.pizhwh != null || commodity.jixing != null">
+				and (
+				    1 = 1
+					<if test="commodity.spbh != null">
+						or b.spbh like '%${commodity.spbh}%'
+					</if>
+					<if test="commodity.spmch != null">
+						or b.spmch like '%${commodity.spmch}%'
+					</if>
+					<if test="commodity.shpgg != null">
+					   or b.shpgg like  '%${commodity.shpgg}%'
+					</if>
+					<if test="commodity.pizhwh != null">
+					   or b.pizhwh like '%${commodity.pizhwh}%'
+					</if>
+					<if test="commodity.jixing != null">
+						or b.jixing like '%${commodity.jixing}%'
+					</if>
+				)			
+			</if>
+		</where>
+	     
+   </select>
+    
+</mapper>
+

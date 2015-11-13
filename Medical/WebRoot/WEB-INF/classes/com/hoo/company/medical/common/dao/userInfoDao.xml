@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoo.company.medical.common.dao.IUserInfoDao">
+	
+   <select id="queryLt" resultType="com.hoo.company.medical.common.entity.UserInfoo">
+   		SELECT 
+			USERNAME AS "userName",
+			USERPWD  AS "userPwd",
+			USERCODE AS "userCode"	
+  		FROM USERINFOO
+  		
+  		<where>
+  			<if test="user.userName != null">
+  				AND USERNAME = #{user.userName}
+  			</if>
+  		</where>
+   </select>
+    
+</mapper>
+
